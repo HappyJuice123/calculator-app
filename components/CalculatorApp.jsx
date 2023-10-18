@@ -10,10 +10,6 @@ export const Calculator = () => {
   const [equals, setEquals] = useState(false);
 
   useEffect(() => {
-    // console.log("first number >>>", firstNumber);
-    // console.log("second number >>>", secondNumber);
-    // console.log("answer >>>", answer);
-
     // Handles which number to show on the calculator
     if (operator !== "" && secondNumber !== "" && equals === false) {
       setCalculation(secondNumber);
@@ -70,11 +66,11 @@ export const Calculator = () => {
     }
     // Handles the sqrt for the first number
     else if (operatorButton === "√" && operator === "") {
-      setFirstNumber(Math.sqrt(firstNumber));
+      setFirstNumber(+parseFloat(Math.sqrt(firstNumber)).toFixed(8));
     }
     // Handles the sqrt for the second number
     else if (operatorButton === "√" && operator !== "") {
-      setSecondNumber(Math.sqrt(secondNumber));
+      setSecondNumber(+parseFloat(Math.sqrt(secondNumber)).toFixed(8));
     }
     // Handles if any of the four basic operators are clicked
     else if (
@@ -111,7 +107,7 @@ export const Calculator = () => {
   };
 
   const multiplication = (a, b) => {
-    return parseFloat(a) * parseFloat(b);
+    return +parseFloat(parseFloat(a) * parseFloat(b)).toFixed(8);
   };
 
   const division = (a, b) => {
@@ -119,46 +115,46 @@ export const Calculator = () => {
       return "Err";
     }
 
-    return parseFloat(a) / parseFloat(b);
+    return +parseFloat(parseFloat(a) / parseFloat(b)).toFixed(8);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.answer}>
-        <Text>{calculation}</Text>
+        <Text style={styles.textAnswer}>{calculation}</Text>
       </View>
       <View style={styles.row}>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.clear}
           onPress={() => {
             handleClear();
           }}
         >
-          <Text>AC</Text>
+          <Text style={styles.text}>AC</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.operator}
           onPress={() => {
             handleOperator("+/-");
           }}
         >
-          <Text>+/-</Text>
+          <Text style={styles.text}>+/-</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.operator}
           onPress={() => {
             handleOperator("√");
           }}
         >
-          <Text>√</Text>
+          <Text style={styles.text}>√</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.operator}
           onPress={() => {
             handleOperator("÷");
           }}
         >
-          <Text>÷</Text>
+          <Text style={styles.text}>÷</Text>
         </TouchableOpacity>
       </View>
 
@@ -169,7 +165,7 @@ export const Calculator = () => {
             handleNumbers("7");
           }}
         >
-          <Text>7</Text>
+          <Text style={styles.text}>7</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -177,7 +173,7 @@ export const Calculator = () => {
             handleNumbers("8");
           }}
         >
-          <Text>8</Text>
+          <Text style={styles.text}>8</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -185,15 +181,15 @@ export const Calculator = () => {
             handleNumbers("9");
           }}
         >
-          <Text>9</Text>
+          <Text style={styles.text}>9</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.operator}
           onPress={() => {
             handleOperator("x");
           }}
         >
-          <Text>x</Text>
+          <Text style={styles.text}>x</Text>
         </TouchableOpacity>
       </View>
 
@@ -204,7 +200,7 @@ export const Calculator = () => {
             handleNumbers("4");
           }}
         >
-          <Text>4</Text>
+          <Text style={styles.text}>4</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -212,7 +208,7 @@ export const Calculator = () => {
             handleNumbers("5");
           }}
         >
-          <Text>5</Text>
+          <Text style={styles.text}>5</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -220,15 +216,15 @@ export const Calculator = () => {
             handleNumbers("6");
           }}
         >
-          <Text>6</Text>
+          <Text style={styles.text}>6</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.operator}
           onPress={() => {
             handleOperator("-");
           }}
         >
-          <Text>-</Text>
+          <Text style={styles.text}>-</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.row}>
@@ -238,7 +234,7 @@ export const Calculator = () => {
             handleNumbers("1");
           }}
         >
-          <Text>1</Text>
+          <Text style={styles.text}>1</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -246,7 +242,7 @@ export const Calculator = () => {
             handleNumbers("2");
           }}
         >
-          <Text>2</Text>
+          <Text style={styles.text}>2</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -254,15 +250,15 @@ export const Calculator = () => {
             handleNumbers("3");
           }}
         >
-          <Text>3</Text>
+          <Text style={styles.text}>3</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.operator}
           onPress={() => {
             handleOperator("+");
           }}
         >
-          <Text>+</Text>
+          <Text style={styles.text}>+</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.row}>
@@ -272,7 +268,7 @@ export const Calculator = () => {
             handleNumbers("0");
           }}
         >
-          <Text>0</Text>
+          <Text style={styles.text}>0</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -280,15 +276,15 @@ export const Calculator = () => {
             handleNumbers(".");
           }}
         >
-          <Text>.</Text>
+          <Text style={styles.text}>.</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.operator}
           onPress={() => {
             handleEquals();
           }}
         >
-          <Text>=</Text>
+          <Text style={styles.text}>=</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -301,30 +297,65 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#530707",
   },
   row: {
     flexDirection: "row",
   },
   button: {
-    minWidth: 70,
-    minHeight: 50,
+    minWidth: 75,
+    minHeight: 75,
     borderWidth: 0.5,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 8,
+    backgroundColor: "#C2B9B9",
   },
   zero: {
-    minWidth: 140,
-    minHeight: 50,
+    minWidth: 150,
+    minHeight: 75,
     borderWidth: 0.5,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 8,
+    backgroundColor: "#C2B9B9",
+  },
+  operator: {
+    minWidth: 75,
+    minHeight: 75,
+    borderWidth: 0.5,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    backgroundColor: "#563737",
   },
   answer: {
-    minWidth: 280,
-    minHeight: 50,
+    minWidth: 300,
+    maxWidth: 300,
+    minHeight: 75,
     borderWidth: 0.5,
     justifyContent: "center",
     alignItems: "flex-end",
     paddingRight: 20,
+    marginBottom: 25,
+    backgroundColor: "#C2B9B9",
+    borderRadius: 8,
+  },
+  clear: {
+    minWidth: 75,
+    minHeight: 75,
+    borderWidth: 0.5,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    backgroundColor: "#F76363",
+  },
+  text: {
+    color: "white",
+    fontSize: 22,
+  },
+  textAnswer: {
+    color: "white",
+    fontSize: 30,
   },
 });
